@@ -99,3 +99,9 @@ header {
   background-color: darkgrey;
   outline: 1px solid slategrey;
 }
+
+.validator {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+}

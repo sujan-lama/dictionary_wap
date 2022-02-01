@@ -17,7 +17,7 @@ function onReady() {
         content.hide();
         content.removeClass("active")
         infoText.css("color", "#9A9A9A");
-        infoText.html("Type any existing word and press enter to get definition");
+        infoText.html("Type any word and press lookup to get definition.");
     });
 
 
@@ -27,9 +27,15 @@ function onReady() {
         content.empty();
         content.hide();
         let url = `/api/search?q=${word}`;
-        fetch(url).then(response => response.json()).then(result => data(result, word)).catch(() => {
+        $.get(url, function (result, status) {
+            if (status === "success") {
+                data(result, word);
+                return;
+            }
             infoText.html(`Can't find the meaning of <span>"${word}"</span>. Please, try to search for another word.`);
+
         });
+
     }
 
     function data(result, word) {
